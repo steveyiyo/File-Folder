@@ -14,7 +14,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var hostname = "localhost:80"
+var hostname string
 
 func indexPage(c *gin.Context) {
 	var showFileOut []string
@@ -32,6 +32,7 @@ func indexPage(c *gin.Context) {
 	c.HTML(200, "index.html", gin.H{
 		"showFile": template.HTML(outStr),
 	})
+	hostname = c.Request.Host
 }
 
 func showFile(file_folder string) []string {
