@@ -16,33 +16,54 @@ import (
 var hostname = "localhost:80"
 
 func indexPage(c *gin.Context) {
+	var showFileOut []string
+	var outStr string
+	showFileOut = showFile("upload_file")
+	for _, out := range showFileOut {
+		outStr += out
+		if out != "" {
+			outStr += "\n"
+		}
+	}
+	if outStr == "" {
+		outStr = "唉呀！目前沒有任何檔案 嗚嗚"
+	}
+	fmt.Printf(outStr)
 	c.HTML(200, "index.html", gin.H{
-		"showFile": showFile("upload_file"),
+		"showFile": outStr,
 	})
 }
 
-func showFile(file_folder string) string {
-	var pathOut string
+func showFile(file_folder string) []string {
+	//var pathOut string
+	var pathDirOut []string
+	var pathOut []string
 	var allOut []string
 
 	files, _ := ioutil.ReadDir(file_folder)
 	for _, file := range files {
 		if file.IsDir() {
 			path := showFile(file_folder + "/" + file.Name())
-			pathOut = strings.ReplaceAll(path, "upload_file/", hostname+"/static/")
-			allOut = append(allOut, pathOut)
-			fmt.Println(allOut)
+			//pathOut = strings.ReplaceAll(path, "upload_file/", hostname+"/static/")
+			pathDirOut = append(pathDirOut, path...)
 		} else {
 			path := (file_folder + "/" + file.Name())
-			pathOut = (strings.ReplaceAll(path, "upload_file/", hostname+"/file/"))
-			allOut = append(allOut, pathOut)
-			fmt.Println(allOut)
+			//pathOut = (strings.ReplaceAll(path, "upload_file/", hostname+"/file/"))
+			pathOut = append(pathOut, path)
 		}
 	}
-	if pathOut == "" {
-		pathOut = "唉呀！目前沒有任何檔案 嗚嗚"
+	for _, out := range pathDirOut {
+		allOut = append(allOut, strings.ReplaceAll(out, "upload_file/", hostname+"/static/"))
 	}
-	return pathOut
+	for _, out := range pathOut {
+		allOut = append(allOut, strings.ReplaceAll(out, "upload_file/", hostname+"/file/"))
+	}
+	/*
+		if pathOut == "" {
+			pathOut = "唉呀！目前沒有任何檔案 嗚嗚"
+		}
+	*/
+	return allOut
 }
 
 func uploadPage(c *gin.Context) {
@@ -93,7 +114,7 @@ func uploadFile(c *gin.Context) {
 
 func main() {
 
-	fmt.Print("\n-------------------\n")
+	fmt.Print("\n-------------------")
 	fmt.Print("\nFile and Folder System")
 	fmt.Print("\nPort listing at 80")
 	fmt.Print("\nRepo: https://github.com/steveyiyo/file_folder")
