@@ -3,16 +3,46 @@ package main
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
+var hostname = "localhost:80"
+
 func indexPage(c *gin.Context) {
-	c.HTML(200, "index.html", nil)
+	c.HTML(200, "index.html", gin.H{
+		"showFile": showFile("upload_file"),
+	})
+}
+
+func showFile(file_folder string) string {
+	var pathOut string
+	var allOut []string
+
+	files, _ := ioutil.ReadDir(file_folder)
+	for _, file := range files {
+		if file.IsDir() {
+			path := showFile(file_folder + "/" + file.Name())
+			pathOut = strings.ReplaceAll(path, "upload_file/", hostname+"/static/")
+			allOut = append(allOut, pathOut)
+			fmt.Println(allOut)
+		} else {
+			path := (file_folder + "/" + file.Name())
+			pathOut = (strings.ReplaceAll(path, "upload_file/", hostname+"/file/"))
+			allOut = append(allOut, pathOut)
+			fmt.Println(allOut)
+		}
+	}
+	if pathOut == "" {
+		pathOut = "唉呀！目前沒有任何檔案 嗚嗚"
+	}
+	return pathOut
 }
 
 func uploadPage(c *gin.Context) {
@@ -63,9 +93,9 @@ func uploadFile(c *gin.Context) {
 
 func main() {
 
-	fmt.Print("\n-------------------\n\n")
+	fmt.Print("\n-------------------\n")
 	fmt.Print("\nFile and Folder System")
-	fmt.Print("\nPort listing at 13275")
+	fmt.Print("\nPort listing at 80")
 	fmt.Print("\nRepo: https://github.com/steveyiyo/file_folder")
 	fmt.Print("\nAuthor: SteveYi")
 	fmt.Print("\n-------------------\n\n")
