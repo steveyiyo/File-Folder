@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -22,20 +23,18 @@ func indexPage(c *gin.Context) {
 	for _, out := range showFileOut {
 		outStr += out
 		if out != "" {
-			outStr += "\n"
+			outStr += "<br>"
 		}
 	}
 	if outStr == "" {
 		outStr = "唉呀！目前沒有任何檔案 嗚嗚"
 	}
-	fmt.Printf(outStr)
 	c.HTML(200, "index.html", gin.H{
-		"showFile": outStr,
+		"showFile": template.HTML(outStr),
 	})
 }
 
 func showFile(file_folder string) []string {
-	//var pathOut string
 	var pathDirOut []string
 	var pathOut []string
 	var allOut []string
@@ -44,11 +43,9 @@ func showFile(file_folder string) []string {
 	for _, file := range files {
 		if file.IsDir() {
 			path := showFile(file_folder + "/" + file.Name())
-			//pathOut = strings.ReplaceAll(path, "upload_file/", hostname+"/static/")
 			pathDirOut = append(pathDirOut, path...)
 		} else {
 			path := (file_folder + "/" + file.Name())
-			//pathOut = (strings.ReplaceAll(path, "upload_file/", hostname+"/file/"))
 			pathOut = append(pathOut, path)
 		}
 	}
@@ -58,11 +55,6 @@ func showFile(file_folder string) []string {
 	for _, out := range pathOut {
 		allOut = append(allOut, strings.ReplaceAll(out, "upload_file/", hostname+"/file/"))
 	}
-	/*
-		if pathOut == "" {
-			pathOut = "唉呀！目前沒有任何檔案 嗚嗚"
-		}
-	*/
 	return allOut
 }
 
