@@ -21,15 +21,15 @@ func indexPage(c *gin.Context) {
 	var outStr string
 	showFileOut = showFile("upload_file")
 	for _, out := range showFileOut {
-		outStr += out
+		outStr += fmt.Sprintf("<a href='//%s'>%s</a>", out, out)
 		if out != "" {
-			outStr += "<br>"
+			outStr = fmt.Sprintf("%s<br>", outStr) + "\n"
 		}
 	}
 	if outStr == "" {
 		outStr = "唉呀！目前沒有任何檔案 嗚嗚"
 	}
-	c.HTML(200, "index.html", gin.H{
+	c.HTML(200, "index.tmpl", gin.H{
 		"showFile": template.HTML(outStr),
 	})
 	hostname = c.Request.Host
@@ -60,11 +60,11 @@ func showFile(file_folder string) []string {
 }
 
 func uploadPage(c *gin.Context) {
-	c.HTML(200, "upload.html", nil)
+	c.HTML(200, "upload.tmpl", nil)
 }
 
 func pageNotAvailable(c *gin.Context) {
-	c.HTML(404, "404.html", nil)
+	c.HTML(404, "404.tmpl", nil)
 }
 
 func uploadFile(c *gin.Context) {
