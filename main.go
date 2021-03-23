@@ -17,23 +17,7 @@ import (
 var hostname string
 
 func indexPage(c *gin.Context) {
-	hostname = c.Request.Host
-
-	var showFileOut []string
-	var outStr string
-	showFileOut = showFile("upload_file")
-	for _, out := range showFileOut {
-		outStr += fmt.Sprintf("<a href='//%s'>%s</a>", out, out)
-		if out != "" {
-			outStr = fmt.Sprintf("%s<br>", outStr) + "\n"
-		}
-	}
-	if outStr == "" {
-		outStr = "唉呀！目前沒有任何檔案 嗚嗚"
-	}
-	c.HTML(200, "index.tmpl", gin.H{
-		"showFile": template.HTML(outStr),
-	})
+	c.HTML(200, "index.tmpl", nil)
 }
 
 func showFile(file_folder string) []string {
@@ -62,6 +46,28 @@ func showFile(file_folder string) []string {
 
 func uploadPage(c *gin.Context) {
 	c.HTML(200, "upload.tmpl", nil)
+}
+
+func listPage(c *gin.Context) {
+	hostname = c.Request.Host
+
+	var showFileOut []string
+	var outStr string
+	showFileOut = showFile("upload_file")
+	for _, out := range showFileOut {
+		filename := strings.ReplaceAll(out, hostname, "")
+		outStr += fmt.Sprintf("<a href='//%s' class='item'><i class='file icon'></i> %s</a>", out, filename)
+		if out != "" {
+			outStr = fmt.Sprintf("%s", outStr) + "\n"
+		}
+	}
+	if outStr == "" {
+		outStr = "唉呀！目前沒有任何檔案 嗚嗚"
+	}
+	c.HTML(200, "list.tmpl", gin.H{
+		"showFile":  template.HTML(outStr),
+		"IPAddress": c.ClientIP(),
+	})
 }
 
 func pageNotAvailable(c *gin.Context) {
@@ -121,6 +127,7 @@ func main() {
 	router.LoadHTMLGlob("static/*")
 
 	router.GET("/", indexPage)
+	router.GET("/list", listPage)
 	router.GET("/upload", uploadPage)
 	router.POST("/upload", uploadFile)
 	router.StaticFS("file/", http.Dir("./upload_file"))
