@@ -17,6 +17,8 @@ import (
 var hostname string
 
 func indexPage(c *gin.Context) {
+	hostname = c.Request.Host
+
 	var showFileOut []string
 	var outStr string
 	showFileOut = showFile("upload_file")
@@ -32,7 +34,6 @@ func indexPage(c *gin.Context) {
 	c.HTML(200, "index.tmpl", gin.H{
 		"showFile": template.HTML(outStr),
 	})
-	hostname = c.Request.Host
 }
 
 func showFile(file_folder string) []string {
