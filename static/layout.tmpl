@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+    {{ if eq . "index" }}
     <title>資料存放區</title>
+    {{ else if eq . "list" }}
+    <title>檔案列表</title>
+    {{ else if eq . "upload" }}
+    <title>檔案上傳寶寶</title>
+    {{ end }}
     <style>
         body,
         html {
@@ -68,14 +74,10 @@
             {{ if eq . "index" }}
             <h1 class="ts header">資料存放區</h1>
             <div class="description">可以放資料且方便下載的地方</div>
-            {{ end }}
-
-            {{ if eq . "list" }}
+            {{ else if eq . "list" }}
             <h1 class="ts header">檔案列表</h1>
             <div class="description">點下去就可以下載囉！</div>
-            {{ end }}
-
-            {{ if eq . "upload" }}
+            {{ else if eq . "upload" }}
             <h1 class="ts header">檔案上傳寶寶</h1>
             <div class="description">嗷嗚</div>
             {{ end }}
