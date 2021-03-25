@@ -19,6 +19,8 @@
     <title>檔案列表</title>
     {{ else if eq . "upload" }}
     <title>檔案上傳寶寶</title>
+    {{ else if eq . "404" }}
+    <title>唉呀！</title>
     {{ end }}
     <style>
         body,
@@ -80,6 +82,9 @@
             {{ else if eq . "upload" }}
             <h1 class="ts header">檔案上傳寶寶</h1>
             <div class="description">嗷嗚</div>
+            {{ else if eq . "404" }}
+            <h1 class="ts header">唉呀！</h1>
+            <div class="description">你來到了一個錯誤的頁面</div>
             {{ end }}
 
             <div class="ts bottom attached two item tabbed menu">
