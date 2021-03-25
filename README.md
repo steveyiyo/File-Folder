@@ -1,3 +1,5 @@
+<a href="https://github.com/steveyiyo/file_folder/blob/master/READMD_zh.md">查看中文版</a>
+
 # File Folder System
 
 A System that can upload file and download it.
