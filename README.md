@@ -1,5 +1,7 @@
 # File Folder System
 
+**[查看中文文件](https://github.com/steveyiyo/file_folder/blob/master/READMD_zh.md)**
+
 A System that can upload file and download it.
 
 ### How to use?
