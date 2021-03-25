@@ -91,6 +91,13 @@ func uploadFile(c *gin.Context) {
 		return
 	}
 
+	if _, err := os.Stat("upload_file"); os.IsNotExist(err) {
+		err = os.Mkdir("upload_file", 0755)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
 	nsec := time.Now().UnixNano()
 	filename := strconv.FormatInt(nsec, 10) + "_" + header.Filename
 
