@@ -1,0 +1,111 @@
+{{define "head"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://static.yiy.tw/media/logo/Yi_logo.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+    {{ if eq . "index" }}
+    <title>資料存放區</title>
+    {{ else if eq . "list" }}
+    <title>檔案列表</title>
+    {{ else if eq . "upload" }}
+    <title>檔案上傳寶寶</title>
+    {{ end }}
+    <style>
+        body,
+        html {
+            font-family: 'Noto Sans TC', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #container {
+            flex: 1;
+            width: 100vw;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 50px;
+        }
+
+        .container {
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .red_font {
+            color: #ff0000;
+        }
+
+        .dropzone {
+            background: white;
+            border-radius: 4px;
+            border: 2px dashed rgb(0, 135, 247);
+            border-image: none;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dropzone .dz-preview .dz-image {
+            border-radius: 4px;
+        }
+
+        .dropzone .dz-preview.dz-file-preview .dz-image {
+            background: #0387f7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ts fluid vertically padded heading slate">
+        <div class="ts narrow container">
+            {{ if eq . "index" }}
+            <h1 class="ts header">資料存放區</h1>
+            <div class="description">可以放資料且方便下載的地方</div>
+            {{ else if eq . "list" }}
+            <h1 class="ts header">檔案列表</h1>
+            <div class="description">點下去就可以下載囉！</div>
+            {{ else if eq . "upload" }}
+            <h1 class="ts header">檔案上傳寶寶</h1>
+            <div class="description">嗷嗚</div>
+            {{ end }}
+
+            <div class="ts bottom attached two item tabbed menu">
+                <a href="/" class='item {{ if eq . "index" }} active {{ end }}'>關於</a>
+                <a href="/list" class='item {{ if eq . "list" }} active {{ end }}'>檔案列表</a>
+                <a href="/upload" class='item {{ if eq . "upload" }} active {{ end }}'>上傳檔案</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="ts narrow container" id="container">
+        {{end}} {{define "footer"}}
+    </div>
+    <div class="ts fluid slate">
+        <div class="ts narrow container">
+            <div class="copyright">Design by
+                <a href="https://steveyi.net/">SteveYi</a> and <a href="https://iambjlu.yiy.tw/">iambjlu</a> at
+                <script type="text/javascript">
+                    document.write(new Date().getFullYear());
+                </script>
+                <br> 此頁面由 <a href="https://gnehs.net/">gnehs</a> 可愛支援
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+{{end}}

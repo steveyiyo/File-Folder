@@ -1,64 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="https://static.yiy.tw/media/logo/Yi_logo.png">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <title>資料存放區</title>
-    <style>
-        body,
-        html {
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-        
-        h1 {
-            font-weight: 700;
-            font-size: 50px;
-        }
-        
-        .container {
-            max-width: 768px;
-            margin: 0 auto;
-        }
-        
-        .red_font {
-            color: #ff0000
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h1>資料存放區</h1>
-        <p>可以放資料且方便下載的地方</p>
-        <h2>關於</h2>
-        這是一個方便放東西的系統。<br> 只需要將靜態文件放置 upload_file 資料夾或 <a href="upload">上傳</a> 即可
-        <h2>本系統使用規範</h2>
-        <ul>
-            <li> 僅供學術研究用途使用</li>
-            <li> 請勿用於商業用途，軟體及商標版權歸其所有人所有</li>
-            <li> 系統後端由 <a href="https://steveyi.net/">@steveyiyo</a> 所開發</li>
-            <li> 伺服器由 <a href="https://iambjlu.yiy.tw/">@iambjlu</a> 及 <a href="https://steveyi.net/">@steveyiyo</a> 共同維護</li>
-        </ul>
-        <h2>上傳檔案</h2>
-        請至 <a href="upload">此頁面</a> 上傳檔案
-        <h2>建議我們</h2>
-        我們歡迎您針對此系統給予建議。<br> 您可至此專案的 <a href="https://github.com/steveyiyo/file_folder">GitHub Repo</a> 開啟新的 Issue 或是 PR<br>
-        <div class="red_font">安全問題請勿開啟 Issue 或是 PR，請先行發信至 admin_steveyi_net !!!</div>
-        <h2>檔案列表</h2>
-        <a href="list">點我前往</a>
-        <br>
-        <br> Design by
-        <a href="https://steveyi.net/">SteveYi</a> and <a href="https://iambjlu.yiy.tw/">iambjlu</a> at
-        <script type="text/javascript">
-            document.write(new Date().getFullYear());
-        </script>
-    </div>
-</body>
-
-</html>
+{{template "head" .page}}
+<br>
+<h2>關於</h2>
+這是一個方便放東西的系統。<br> 只需要將靜態文件放置 upload_file 資料夾或 <a href="upload">上傳</a> 即可
+<h2>本系統使用規範</h2>
+<ul>
+    <li> 僅供學術研究用途使用</li>
+    <li> 請勿用於商業用途，軟體及商標版權歸其所有人所有</li>
+    <li> 系統後端由 <a href="https://steveyi.net/">@steveyiyo</a> 所開發</li>
+    <li> 伺服器由 <a href="https://iambjlu.yiy.tw/">@iambjlu</a> 及 <a href="https://steveyi.net/">@steveyiyo</a> 共同維護</li>
+</ul>
+<h2>建議我們</h2>
+我們歡迎您針對此系統給予建議。<br> 您可至此專案的 <a href="https://github.com/steveyiyo/file_folder">GitHub Repo</a> 開啟新的 Issue 或是 PR<br>
+<div class="red_font">安全問題請勿開啟 Issue 或是 PR，請先行發信至 admin_steveyi_net !!!</div>
+{{template "footer"}}
