@@ -17,7 +17,9 @@ import (
 var hostname string
 
 func indexPage(c *gin.Context) {
-	c.HTML(200, "index.tmpl", nil)
+	c.HTML(200, "index.tmpl", gin.H{ 
+		"page":"index",
+	})
 }
 
 func showFile(file_folder string) []string {
@@ -45,7 +47,9 @@ func showFile(file_folder string) []string {
 }
 
 func uploadPage(c *gin.Context) {
-	c.HTML(200, "upload.tmpl", nil)
+	c.HTML(200, "upload.tmpl", gin.H{ 
+		"page":"upload",
+	})
 }
 
 func listPage(c *gin.Context) {
@@ -67,11 +71,14 @@ func listPage(c *gin.Context) {
 	c.HTML(200, "list.tmpl", gin.H{
 		"showFile":  template.HTML(outStr),
 		"IPAddress": c.ClientIP(),
+		"page":"list",
 	})
 }
 
 func pageNotAvailable(c *gin.Context) {
-	c.HTML(404, "404.tmpl", nil)
+	c.HTML(404, "404.tmpl", gin.H{ 
+		"page":"404",
+	})
 }
 
 func uploadFile(c *gin.Context) {

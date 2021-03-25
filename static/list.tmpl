@@ -1,60 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="https://static.yiy.tw/media/logo/Yi_logo.png">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <!-- 始春延期 UI -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
-        <title>資料存放區</title>
-        <style>
-            body,
-            html {
-                font-family: 'Noto Sans TC', sans-serif;
-                font-weight: bold;
-            }
-
-            h1 {
-                font-weight: 700;
-                font-size: 50px;
-            }
-
-            .container {
-                max-width: 768px;
-                margin: 0 auto;
-            }
-
-            .red_font {
-                color: #ff0000;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div class="ts padded horizontally fitted fluid slate">
-            <div class="ts very narrow container">
-                <h1 class="ts dividing header">檔案列表</h1>
-                <p>點下去就可以下載囉！</p>
-            </div>
-        </div>
-        <br>
-        <div class="ts very narrow container" id="container">
-            <div class="ts selection segmented list">
-                {{ .showFile }}
-            </div>
-            請注意，系統會紀錄您目前的 IP 位置：{{ .IPAddress }}
-            <br>
-            <br>Design by
-        <a href="https://steveyi.net/">SteveYi</a> and <a href="https://iambjlu.yiy.tw/">iambjlu</a> at
-        <script type="text/javascript">
-                document.write(new Date().getFullYear());
-            </script>
-        </div>
-    </body>
-
-</html>
+{{template "head" .page}}
+<div class="ts selection segmented list">
+    {{ .showFile }}
+</div>
+請注意，系統會紀錄您目前的 IP 位置：{{ .IPAddress }}
+{{template "footer"}}
