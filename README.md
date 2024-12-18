@@ -15,13 +15,3 @@ A System that can upload file and download it.
 3. Run It!
 
 **PS. You can edit HTML File in the static folder**
-
-### ScreenShot
-
-![](image/002.png)
-
-![](image/003.png)
-
-![](image/004.png)
-
-![](image/001.png)
